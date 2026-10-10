@@ -1,0 +1,29 @@
+
+class Solution {
+    public String getPermutation(int n, int k) {
+        StringBuilder result = new StringBuilder();
+        java.util.List<Integer> numbers = new java.util.ArrayList<>();
+
+        int fact = 1;
+
+        for (int i = 1; i < n; i++) {
+            fact *= i;
+            numbers.add(i);
+        }
+        numbers.add(n);
+
+        k--;
+
+        while (true) {
+            result.append(numbers.remove(k / fact));
+            if (numbers.isEmpty()) {
+                break;
+            }
+
+            k %= fact;
+            fact /= numbers.size();
+        }
+
+        return result.toString();
+    }
+}
