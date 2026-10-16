@@ -1,0 +1,27 @@
+
+import java.util.*;
+
+class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> result = new ArrayList<>();
+        dfs(root, targetSum, new ArrayList<>(), result);
+        return result;
+    }
+
+    void dfs(TreeNode root, int target, List<Integer> path,
+             List<List<Integer>> result) {
+        if (root == null) return;
+
+        path.add(root.val);
+        target -= root.val;
+
+        if (root.left == null && root.right == null && target == 0) {
+            result.add(new ArrayList<>(path));
+        } else {
+            dfs(root.left, target, path, result);
+            dfs(root.right, target, path, result);
+        }
+
+        path.remove(path.size() - 1);
+    }
+}
